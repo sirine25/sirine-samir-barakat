@@ -1,0 +1,576 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% Simple LaTeX CV Template %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% NOTE: If you find that it says                                     %%
+%%                                                                    %%
+%%                           1 of ??                                  %%
+%%                                                                    %%
+%% at the bottom of your first page, this means that the AUX file     %%
+%% was not available when you ran LaTeX on this source. Simply RERUN  %%
+%% LaTeX to get the ``??'' replaced with the number of the last page  %%
+%% of the document. The AUX file will be generated on the first run   %%
+%% of LaTeX and used on the second run to fill in all of the          %%
+%% references.                                                        %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Don't like 10pt? Try 11pt or 12pt
+\documentclass[10pt]{article}
+\RequirePackage[T1]{fontenc}
+
+% The automated optical recognition software used to digitize resume
+% information works best with fonts that do not have serifs. This
+% command uses a sans serif font throughout. Uncomment both lines (or at
+% least the second) to restore a Roman font (i.e., a font with serifs).
+%\usepackage{times}
+%\renewcommand{\familydefault}{\sfdefault}
+
+% This is a helpful package that puts math inside length specifications
+\usepackage{calc}
+
+% added by samer
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% Layout: Puts the section titles on left side of page
+\reversemarginpar
+
+%
+%         PAPER SIZE, PAGE NUMBER, AND DOCUMENT LAYOUT NOTES:
+%
+% The next \usepackage line changes the layout for CV style section
+% headings as marginal notes. It also sets up the paper size as either
+% letter or A4. By default, letter was used. If A4 paper is desired,
+% comment out the letterpaper lines and uncomment the a4paper lines.
+%
+% As you can see, the margin widths and section title widths can be
+% easily adjusted.
+%
+% ALSO: Notice that the includefoot option can be commented OUT in order
+% to put the PAGE NUMBER *IN* the bottom margin. This will make the
+% effective text area larger.
+%
+% IF YOU WISH TO REMOVE THE ``of LASTPAGE'' next to each page number,
+% see the note about the +LP and -LP lines below. Comment out the +LP
+% and uncomment the -LP.
+%
+% IF YOU WISH TO REMOVE PAGE NUMBERS, be sure that the includefoot line
+% is uncommented and ALSO uncomment the \pagestyle{empty} a few lines
+% below.
+%
+
+%% Use these lines for letter-sized paper
+\usepackage[paper=letterpaper,
+            %includefoot, % Uncomment to put page number above margin
+            marginparwidth=1.2in,     % Length of section titles
+            marginparsep=.05in,       % Space between titles and text
+            margin=1in,               % 1 inch margins
+            includemp]{geometry}
+
+%% Use these lines for A4-sized paper
+%\usepackage[paper=a4paper,
+%            %includefoot, % Uncomment to put page number above margin
+%            marginparwidth=30.5mm,    % Length of section titles
+%            marginparsep=1.5mm,       % Space between titles and text
+%            margin=25mm,              % 25mm margins
+%            includemp]{geometry}
+
+%% More layout: Get rid of indenting throughout entire document
+\setlength{\parindent}{0in}
+
+\usepackage[shortlabels]{enumitem}
+
+% Simpler bibsections for CV sections
+% (thanks to natbib for inspiration)
+%
+% * For lists of references with hanging indents and no numbers:
+%
+%   \begin{bibsection}
+%       \item ...
+%   \end{bibsection}
+%
+% * For numbered lists of references (with hanging indents):
+%
+%   \begin{bibenum}
+%       \item ...
+%   \end{bibenum}
+%
+%   Note that bibenum numbers continuously throughout. To reset the
+%   counter, use
+%
+%   \restartlist{bibenum}
+%
+%   at the place where you want the numbering to reset.
+
+\makeatletter
+\newlength{\bibhang}
+\setlength{\bibhang}{1em}
+\newlength{\bibsep}
+ {\@listi \global\bibsep\itemsep \global\advance\bibsep by\parsep}
+\newlist{bibsection}{itemize}{3}
+\setlist[bibsection]{label=,leftmargin=\bibhang,%
+        itemindent=-\bibhang,
+        itemsep=\bibsep,parsep=\z@,partopsep=0pt,
+        topsep=0pt}
+\newlist{bibenum}{enumerate}{3}
+\setlist[bibenum]{label=[\arabic*],resume,leftmargin={\bibhang+\widthof{[999]}},%
+        itemindent=-\bibhang,
+        itemsep=\bibsep,parsep=\z@,partopsep=0pt,
+        topsep=0pt}
+\let\oldendbibenum\endbibenum
+\def\endbibenum{\oldendbibenum\vspace{-.6\baselineskip}}
+\let\oldendbibsection\endbibsection
+\def\endbibsection{\oldendbibsection\vspace{-.6\baselineskip}}
+\makeatother
+
+%% Reference the last page in the page number
+%
+% NOTE: comment the +LP line and uncomment the -LP line to have page
+%       numbers without the ``of ##'' last page reference)
+%
+% NOTE: uncomment the \pagestyle{empty} line to get rid of all page
+%       numbers (make sure includefoot is commented out above)
+%
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+%\pagestyle{empty}      % Uncomment this to get rid of page numbers
+\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfootoffset{\marginparsep+\marginparwidth}
+\newlength{\footpageshift}
+\setlength{\footpageshift}
+          {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
+\lfoot{\hspace{\footpageshift}%
+       \parbox{4in}{\, \hfill %
+                    \arabic{page} of \protect\pageref*{LastPage} % +LP
+%                    \arabic{page}                               % -LP
+                    \hfill \,}}
+
+% Finally, give us PDF bookmarks
+\usepackage{color,hyperref}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% HEADING AT TOP OF CURRICULUM VITAE
+
+% The title (name) with a horizontal rule under it
+% (optional argument typesets an object right-justified across from name
+%  as well)
+%
+% Usage: \makeheading{name}
+%        OR
+%        \makeheading[right_object]{name}
+%
+% Place at top of document. It should be the first thing.
+% If ``right_object'' is provided in the square-braced optional
+% argument, it will be right justified on the same line as ``name'' at
+% the top of the CV. For example:
+%
+%       \makeheading[\emph{Curriculum vitae}]{Your Name}
+%
+% will put an emphasized ``Curriculum vitae'' at the top of the document
+% as a title. Likewise, a picture could be included:
+%
+%   \makeheading[{\includegraphics[height=1.5in]{my_picture}}]{Your Name}
+%
+% the picture will be flush right across from the name. For this example
+% to work, make sure the extra set of curly braces is included. Also
+% makes ure that \usepackage{graphicx} is somewhere in the preamble.
+\newcommand{\makeheading}[2][]%
+        {\hspace*{-\marginparsep minus \marginparwidth}%
+         \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
+             {\large \bfseries #2 \hfill #1}\\[-0.15\baselineskip]%
+                 \rule{\columnwidth}{1pt}%
+         \end{minipage}}
+
+%%% SECTION HEADINGS
+
+% The section headings. Flush left in small caps down pseudo-margin.
+%
+% Usage: \section{section name}
+\renewcommand{\section}[1]{\pagebreak[3]%
+    \vspace{1.3\baselineskip}%
+    \phantomsection\addcontentsline{toc}{section}{#1}%
+    \noindent\llap{\scshape\smash{\parbox[t]{\marginparwidth}{\hyphenpenalty=10000\raggedright #1}}}%
+    \vspace{-\baselineskip}\par}
+
+%%% LISTS
+
+% This macro alters a list by removing some of the space that follows the list
+% (is used by lists below)
+\newcommand*\fixendlist[1]{%
+    \expandafter\let\csname preFixEndListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\csname preFixEndListend#1\endcsname\vspace{-0.6\baselineskip}}}
+
+% These macros help ensure that items in outer-type lists do not get
+% separated from the next line by a page break
+% (they are used by lists below)
+\let\originalItem\item
+\newcommand*\fixouterlist[1]{%
+    \expandafter\let\csname preFixOuterList#1\expandafter\endcsname\csname #1\endcsname
+    \expandafter\def\csname #1\endcsname{\csname preFixOuterList#1\endcsname\let\oldItem\item\def\item{\pagebreak[2]\oldItem}}
+    \expandafter\let\csname preFixOuterListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\let\item\oldItem\csname preFixOuterListend#1\endcsname}}
+\newcommand*\fixinnerlist[1]{%
+    \expandafter\let\csname preFixInnerList#1\expandafter\endcsname\csname #1\endcsname
+    \expandafter\def\csname #1\endcsname{\let\oldItem\item\let\item\originalItem\csname preFixInnerList#1\endcsname}
+    \expandafter\let\csname preFixInnerListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\csname preFixInnerListend#1\endcsname\let\item\oldItem}}
+
+% An itemize-style list with lots of space between items
+%
+% Usage:
+%   \begin{outerlist}
+%       \item ...    % (or \item[] for no bullet)
+%   \end{outerlist}
+\newlist{outerlist}{itemize}{3}
+    \setlist[outerlist]{label=\enskip\textbullet,leftmargin=*}
+    \fixendlist{outerlist}
+    \fixouterlist{outerlist}
+
+% An environment IDENTICAL to outerlist that has better pre-list spacing
+% when used as the first thing in a \section
+%
+% Usage:
+%   \begin{lonelist}
+%       \item ...    % (or \item[] for no bullet)
+%   \end{lonelist}
+\newlist{lonelist}{itemize}{3}
+    \setlist[lonelist]{label=\enskip\textbullet,leftmargin=*,partopsep=0pt,topsep=0pt}
+    \fixendlist{lonelist}
+    \fixouterlist{lonelist}
+
+% An itemize-style list with little space between items
+%
+% Usage:
+%   \begin{innerlist}
+%       \item ...    % (or \item[] for no bullet)
+%   \end{innerlist}
+\newlist{innerlist}{itemize}{3}
+    \setlist[innerlist]{label=\enskip\textbullet,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt}
+    \fixinnerlist{innerlist}
+
+% An environment IDENTICAL to innerlist that has better pre-list spacing
+% when used as the first thing in a \section
+%
+% Usage:
+%   \begin{loneinnerlist}
+%       \item ...    % (or \item[] for no bullet)
+%   \end{loneinnerlist}
+\newlist{loneinnerlist}{itemize}{3}
+    \setlist[loneinnerlist]{label=\enskip\textbullet,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt}
+    \fixendlist{loneinnerlist}
+    \fixinnerlist{loneinnerlist}
+
+%%% EXTRA SPACE
+
+% To add some paragraph space between lines.
+% This also tells LaTeX to preferably break a page on one of these gaps
+% if there is a needed pagebreak nearby.
+\newcommand{\blankline}{\quad\pagebreak[3]}
+\newcommand{\halfblankline}{\quad\vspace{-0.5\baselineskip}\pagebreak[3]}
+
+%%% FORMATTING MACROS
+
+% Uses hyperref to link DOI
+\newcommand\doilink[1]{\href{http://dx.doi.org/#1}{#1}}
+\newcommand\doi[1]{doi:\doilink{#1}}
+
+% For \url{SOME_URL}, links SOME_URL to the url SOME_URL
+\providecommand*\url[1]{\href{#1}{#1}}
+% Same as above, but pretty-prints SOME_URL in teletype fixed-width font
+\renewcommand*\url[1]{\href{#1}{\texttt{#1}}}
+
+% For \email{ADDRESS}, links ADDRESS to the url mailto:ADDRESS
+\providecommand*\email[1]{\href{mailto:#1}{#1}}
+% Same as above, but pretty-prints ADDRESS in teletype fixed-width font
+%\renewcommand*\email[1]{\href{mailto:#1}{\texttt{#1}}}
+
+%\providecommand\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+%    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+%\providecommand\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+%    \TeX}}
+\providecommand\BibTeX{{B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    \TeX}}
+\providecommand\Matlab{\textsc{Matlab}}
+
+% Custom hyphenation rules for words that LaTeX has trouble with
+\hyphenation{bio-mim-ic-ry bio-in-spi-ra-tion re-us-a-ble pro-vid-er}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\makeheading{\huge Samer S. Barakat}
+
+\section{Contact Information}
+
+% NOTE: Mind where the & separators and \\ breaks are in the following
+%       table. Table is one row made up of three parboxes. The left
+%       parbox has address info, the middle parbox has a vertical bar,
+%       and the right parbox has phone and electronic contact
+%       information.
+%
+% MACROS: \rcollength is the width of the right column of the table
+%             (adjust it to your liking; default is 1.85in).
+%         \spacewidth is width of area between left and right boxes.
+%         \spacechar is character used to produce perforated vertical
+%             boundary between boxes.
+%
+\newlength{\rcollength}\setlength{\rcollength}{2.2in}%
+\newlength{\spacewidth}\setlength{\spacewidth}{20pt}
+\newcommand\spacechar{$|$}
+%
+\begin{tabular}[t]{@{}p{\textwidth-\rcollength-\spacewidth}@{}p{\spacewidth}@{}p{\rcollength}}%
+
+
+
+% Non-snail-mail contact information
+\parbox{\rcollength}{%
+\textit{Mobile:} +1-765-464-9712\\
+\textit{E-mail:} \email{samer.barakat@gmail.com}\\
+\textit{City: Santa Clara, CA}}
+
+\end{tabular}
+
+%%
+%% In modern CV's, it seems like ``Objective'' is frowned upon. Instead,
+%% incorporate it into a well-constructed cover letter. The ``More
+%% information'' can go at the end of the CV, but it should not distract
+%% from the section giving references available to contact.
+%%
+%
+% \section{Objective}
+%
+% Placement in an academic position (i.e., faculty, postdoctoral, or
+% research scientist) that allows for advanced research in distributed
+% complex adaptive systems (i.e., modeling, analysis, design, and
+% verification) with a particular focus on the control of engineered
+% agents (e.g., for communications, control, software, electronics, and
+% sustainability) and the analysis of biological phenomena (e.g.,
+% self-organization, ecological rationality)
+% \begin{innerlist}
+% \item More information and auxiliary documents can be found at\\\url{http://www.tedpavlic.com/facjobsearch/}
+% \end{innerlist}
+
+%\section{Citizenship}
+
+%Egyptian citizen living in the USA on F1-Student visa.
+
+\section{Summary}
+
+Samer has a strong background in machine learning (both classical and deep methods), computer graphics, image processing, simulation, control theory and robotics. Current interests include tracking and mapping (SLAM), localization at scale, sensor fusion, large scale 3D reconstruction, object detection/tracking, and navigation and path planning for robotics. Managed a team of engineers, and interfaced with both external customers, discussing deliveries and timeline, in addition to internal cross-functional groups for QA, acquisitions, power / performance, application development and user experience scientists. Hands-on coding with a wide variety of development environments, architectures, languages and tools.
+
+\section{Professional Experience}
+
+\vspace{1\bigskipamount}\href{http://www.apple.com}{\textbf{Apple Inc}},
+Sunnyvale, CA
+
+\begin{outerlist}
+	
+	\item[] \textit{Senior CVML R\&D Engineer}%
+	\hfill \textbf{December 2018 to present}
+	
+Designing algorithms including feature definition, dependencies, KPIs, and power / performance envelops for key computer vision capabilities to be delivered on future Apple products.
+	
+\end{outerlist}
+
+\vspace{1\bigskipamount}\href{http://www.intel.com}{\textbf{Intel Corporation}},
+Santa Clara, CA
+
+\begin{outerlist}
+	
+\item[] \textit{Senior Staff R\&D engineer}%
+	\hfill \textbf{October 2013 to November 2018}
+
+Main contributor to the  \href{https://www.youtube.com/watch?v=btwU_pT-tao}{\textbf{Scene Perception module}} (SLAM and 3D reconstruction) of the Intel RealSense SDK. Designed new algorithms while following up with teams for QA, performance, and internal/external application development. Worked on defining product features, key deliveries, and timeline. Also, provided input for new vision features on next generation architectures in addition to the evaluation of new vision technologies considered for acquisition or licensing.
+
+\end{outerlist}
+
+
+\vspace{1\bigskipamount}\href{http://www.purdue.edu}{\textbf{Purdue
+University}}, West Lafayette, IN
+
+\begin{outerlist}
+
+\item[] \textit{Research Assistant}%
+	\hfill \textbf{January 2009 to June 2013} \\
+	Since spring 2009, I worked as an RA at the Graphics and Visualization lab under the supervision of Prof. Xavier Tricoche.\\
+
+\item[] \textit{Teaching Assistant}%
+    \hfill \textbf{August 2007 to December 2008}
+    \begin{innerlist}
+    	\item CS 580 Algorithm design and analysis (Fall 2008)
+    	\item CS 240 Programming in C (Spring 2008)
+    	\item CS 456 Programming Languages (Fall 2007)
+    \end{innerlist}
+
+\end{outerlist}
+
+
+\vspace{1\bigskipamount}\href{http://ge.geglobalresearch.com/locations/niskayuna-ny-usa/}{\textbf{GE Global Research}},
+Niskayuna, NY
+
+\begin{outerlist}
+
+\item[] \textit{Graduate summer internship}%
+	\hfill \textbf{May 2011 to August 2011}
+
+Worked on visual analytics of multivariate time series data for the discovery of patterns, classification, and early detection of abnormal operation in gas turbines.
+
+\end{outerlist}
+
+\vspace{1\bigskipamount}\href{http://www.intel.com}{\textbf{Intel Corporation}},
+Hillsboro, OR
+
+\begin{outerlist}
+
+\item[] \textit{Graduate summer internship}%
+	\hfill \textbf{May 2010 to August 2010}
+
+Built kernel level tools, and workloads to analyze HPC hardware performance.
+
+\end{outerlist}
+
+
+\vspace{1\bigskipamount}\href{http://www.bibalex.org}{\textbf{Bibliotheca Alexandrina}},
+Alexandria, EGYPT
+
+\begin{outerlist}
+
+\item[] \textit{Engineering Manager}%
+	\hfill \textbf{Sep. 2003 to July 2007}
+
+%I started as a software engineer in Sep. 2003. In May 2006, I was promoted to the head of \emph{} .
+Managed a team of software engineers, graphics designers, and lab technicians responsible for several projects in the following categories:
+\begin{innerlist}
+
+    \item Computer vision (s.a. image processing tools for OCR, color and warp correction)
+
+    \item Digitization projects (s.a. \href{http://descegy.bibalex.org/}{“Description de l’Egypte”}, \href{http://lartarabe.bibalex.org/}{“l’Art Arabe”})
+
+    \item Web applications (s.a. \href{http://lamap.bibalex.org/}{“La main à la pâte”}, lightweight web-based \href{http://lartarabe.bibalex.org:8080/TextViewer/org.bibalex.textViewer.Main/index.html?id=2#pid=7&pg=1&sq=}{text reader}).
+
+    \item Scientific computing and visualization using a computer cluster and a VR system.
+
+
+\end{innerlist}
+
+\end{outerlist}
+
+\section{Education}
+
+\href{http://www.purdue.edu/}{\textbf{Purdue University}},
+West Lafayette, IN, USA
+\begin{outerlist}
+	
+	\item[] Ph.D.,
+	\href{http://www.cs.purdue.edu/}
+	{Department of Computer Science}, August 2013
+	\begin{innerlist}
+		\item Thesis Proposal: \emph{High Performance Structure Extraction for Visualization}
+	\end{innerlist}
+	
+	\item[] M.S.,
+	\href{http://www.cs.purdue.edu/}
+	{Department of Computer Science}, August 2011
+	
+\end{outerlist}
+
+\vspace{1\bigskipamount}\textbf{Alexandria University},
+Alexandria, EGYPT
+\begin{outerlist}
+	
+	\item[] M.S.,
+	{Department of Computer and Systems Engineering}, August 2007
+	\begin{innerlist}
+		\item Thesis Topic: \emph{Fuzzy Online Adaptive Controller for Non-linear Systems}
+	\end{innerlist}
+	
+	\item[] B.S.,
+	{Department of Computer and Systems Engineering}, June 2003
+\end{outerlist}
+
+\section{Publications and Posters}
+
+\begin{description}
+	\item ``Adaptive Refinement of the Flow Map using Sparse Samples,'' \textbf{S. Barakat}, and X. Tricoche.
+	\emph{IEEE Visualization Conference}. 2013. [Honorable mention].
+	
+	\item ``Surface-Based Structure Analysis and Visualization for Multifield Time-Varying Datasets,'' \textbf{S. Barakat}, M. Rütten, and X. Tricoche.
+	\emph{IEEE Visualization Conference}. 2012.
+	
+	\item ``Interactive Computation and Rendering of Finite-Time Lyapunov Exponent Fields,'' \textbf{S. Barakat}, C. Garth, and X. Tricoche. \emph{IEEE Transactions on Visualization and Computer Graphics}. 2012.
+	
+	\item ``Efficient Extraction of High-Quality Crease Surfaces for Visual Analysis,'' \textbf{S. Barakat}, N. Andrysco, and X. Tricoche. \emph{Computer Graphics Forum 30(3) (Proc. EuroVis 2011), pp. 961-970}. 2011.
+	
+	\item ``Beyond Topology: A Lagrangian Metaphor to Visualize 3D Tensor Fields,'' X. Tricoche, M. Hlawitschka, \textbf{S. Barakat}, and C. Garth. \emph{New Developments in the Visualization and Processing of Tensor Fields, D. Laidlaw, A. Vilanova (eds.) Springer 2011}.
+	
+	\item ``An Image-Based Approach to Interactive Crease Extraction and Rendering'', \textbf{S. Barakat}, and X. Tricoche. \emph{Procedia Computer Science 1(1) (Proc. ICCS 2010), pp.1703-1712}. 2010.
+	
+	\item ``Fuzzy Online Adaptive Controller for Non-linear Systems'', \textbf{S. Barakat}. \emph{Master's Thesis}. 2007.
+	
+	\item ``High Performance Structure Extraction for Visualization,'' \textbf{S. Barakat}, and X. Tricoche.  \emph{Doctoral colloquium, IEEE Visualization Conference}. 2011.
+	
+	\item ``Interactive Analysis and Visualization of Time Series Datasets,'' \textbf{S. Barakat}, J. Chen, and R. Kaucic. \emph{Poster at GE Global Research}. 2011.
+	
+	\item ``Interactive Computation and Rendering of FTLE,'' \textbf{S. Barakat}, and X. Tricoche. \emph{Poster at NVIDIA GTC}. 2010.
+	
+\end{description}
+
+\section{Patents}
+
+\begin{description}
+	\item Primary inventor on multiple patents with Apple for AR technology (cannot disclose)
+	\item 20180089832	Place Recognition Algorithm
+	\item 20170280129	Multi-modal Real-time Camera Localization and Environment Mapping
+	\item 20170094245	Drift Correction for Camera Tracking
+\end{description}
+
+
+% The ``More Info'' section may not be necessary; make sure it's short
+% so it doesn't prevent people from seeing references available to
+% contact.
+%\section{More Information}
+
+%More information and auxiliary documents can be found at\\%
+%\url{http://www.tedpavlic.com/facjobsearch/}.
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% End CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------%
+% The following is copyright and licensing information for
+% redistribution of this LaTeX source code; it also includes a liability
+% statement. If this source code is not being redistributed to others,
+% it may be omitted. It has no effect on the function of the above code.
+%----------------------------------------------------------------------%
+% Copyright (c) 2007, 2008, 2009, 2010, 2011 by Theodore P. Pavlic
+%
+% Unless otherwise expressly stated, this work is licensed under the
+% Creative Commons Attribution-Noncommercial 3.0 United States License. To
+% view a copy of this license, visit
+% http://creativecommons.org/licenses/by-nc/3.0/us/ or send a letter to
+% Creative Commons, 171 Second Street, Suite 300, San Francisco,
+% California, 94105, USA.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+% OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+% MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+% IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+% CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+% TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+% SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+%----------------------------------------------------------------------%
